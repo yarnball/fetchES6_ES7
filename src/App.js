@@ -14,23 +14,25 @@ const promiseTest = e => {
     })
     .then(json => console.log("promise", json.results))
     .catch(err => console.error(err.message));
-};
+}
+async function asyncTest() {
+        try {
+            let response = await fetch(URL);
+            let json = await response.text()
+            console.log("oooog", json)
+        } catch (e) {
+          console.log('BAD', e.message)
+            return e.message;
+        }
+    }
+
 const request = async () => {
   const response = await fetch(URL);
   return await response.json();
-};
-
-async function asyncTest() {
-  const response = await fetch(URL);
-  if (response.ok) {
-    const json = await response.json();
-    console.log("Async", json.results);
-  }
-  // throw new Error("Could not retrieve results from service");
 }
 
-// console.log('asyncres', )
-request().then(data => console.log(data.results));
+// IMPORTANT *** How to get results
+// request().then(data => console.log(data.results));
 
 export const App = () => (
   <div>
